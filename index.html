@@ -1,1 +1,158 @@
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Log in</title>
+		<style>
+			table {
+				border-collapse: collapse;
+				width: 70%;
+			}
+			th, td {
+				text-align: center;
+				padding: 8px;
+				justify-content: center;
+			}
+			.form {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: row;
+				justify-content: center;
+			}
+			label {
+				display: block;
+				width: 150px;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #000;
+				background-image: none;
+				margin-bottom: 20px;
+			}
+			input[type="text"],
+			input[type="password"] {
+				display: block;
+				width: 100px;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #000;
+				background-image: none;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				margin-bottom: 20px;
+			}
+			.new_row {
+				flex-basis:100%;
+				height: 0px;
+			}
+			button {
+				background-color: #23315d;
+				display: block;
+				width: 200px;
+				padding: 6px 12px;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #fff;
+				background-image: none;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				margin-bottom: 20px;
+			}
+		</style>
+	</head>
+	</body>
+		
+		<table>
+			<tr>
+				<th>Welcome! Please log in</th>
+				<th>New here? Join us!</th>
+			</tr>
+			<tr>
+				<td>
+					<div class="form">
+						<label for="l_username">Username:</label>
+						<input id="l_username" type="text" name="u_name" autocomplete="off" />
+						<div class="new_row"></div>
+						<label for="l_password">Password:</label>
+						<input id="l_password" type="password" name="passw" />
+						<div class="new_row"></div>
+						<label>&nbsp;</label>
+						<div class="new_row"></div>
+						<button type="button" onclick="log_in();" />Log in</button>
+					</div>
+				</td>
+				<td>
+					<div class="form">
+						<label for="r_username">Username:</label>
+						<input id="r_username" type="text" autocomplete="off" />
+						<div class="new_row"></div>
+						<label for="r_password">Password:</label>
+						<input id="r_password" type="password" />
+						<div class="new_row"></div>
+						<label for="r_secret">Secret:</label>
+						<input id="r_secret" type="text" name="secret" autocomplete="off" />
+						<div class="new_row"></div>
+						<button type="button" onclick="register();">Create account</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			const BASE_URL = "http://localhost"
+			async function getDataLogin(body) {
+				try {
+					const token = await fetch(`${BASE_URL}/login`, {
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					method: "POST",
+					body: body,
+					
+					});
+					if (!token.ok) {
+						throw new Error(`HTTP error! Status: ${res.status}`);
+					}
+					const json = await token.json();
+					document.cookie = `token=${String(json.access_token)}`;
+					window.location.href = `${BASE_URL}/me`;
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+			async function getDataRegister(body) {
+				try {
+					const token = await fetch(`${BASE_URL}/register`, {
+					headers: {'Content-Type': 'application/json'},
+					method: "POST",
+					body: body,
+					
+					});
+					if (!token.ok) {
+						throw new Error(`HTTP error! Status: ${res.status}`);
+					}
+					const json = await token.json();
+					document.cookie = `token=${json.access_token}`;
+					window.location.href = `${BASE_URL}/me`;
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+			function register() {
+				var login = document.getElementById("r_username").value;
+				var passw = document.getElementById("r_password").value;
+				var secret = document.getElementById("r_secret").value;
+				var body = JSON.stringify({"username": login, "password": passw, "secret": secret});
+				getDataRegister(body);
+				document.getElementById("r_username").value = "";
+				document.getElementById("r_password").value = "";
+				document.getElementById("r_secret").value = "";
+			}
+			function log_in() {
+				var login = document.getElementById("l_username").value;
+				var passw = document.getElementById("l_password").value;
+				signInData = "username="+String(login)+"&password="+String(passw)+"&grant_type=password";
+				getDataLogin(signInData);
+				document.getElementById("l_username").value = "";
+				document.getElementById("l_password").value = "";
+			}
+		</script>
+	</body>
+</html>
