@@ -61,7 +61,7 @@
 		</style>
 	</head>
 	</body>
-		
+		<p style="background-image: url('spin_test.gif');">
 		<table>
 			<tr>
 				<th>Welcome! Please log in</th>
@@ -97,62 +97,5 @@
 				</td>
 			</tr>
 		</table>
-		<script type="text/javascript">
-			const BASE_URL = "http://localhost"
-			async function getDataLogin(body) {
-				try {
-					const token = await fetch(`${BASE_URL}/login`, {
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					method: "POST",
-					body: body,
-					
-					});
-					if (!token.ok) {
-						throw new Error(`HTTP error! Status: ${res.status}`);
-					}
-					const json = await token.json();
-					document.cookie = `token=${String(json.access_token)}`;
-					window.location.href = `${BASE_URL}/me`;
-				} catch (error) {
-					console.error(error.message);
-				}
-			}
-			async function getDataRegister(body) {
-				try {
-					const token = await fetch(`${BASE_URL}/register`, {
-					headers: {'Content-Type': 'application/json'},
-					method: "POST",
-					body: body,
-					
-					});
-					if (!token.ok) {
-						throw new Error(`HTTP error! Status: ${res.status}`);
-					}
-					const json = await token.json();
-					document.cookie = `token=${json.access_token}`;
-					window.location.href = `${BASE_URL}/me`;
-				} catch (error) {
-					console.error(error.message);
-				}
-			}
-			function register() {
-				var login = document.getElementById("r_username").value;
-				var passw = document.getElementById("r_password").value;
-				var secret = document.getElementById("r_secret").value;
-				var body = JSON.stringify({"username": login, "password": passw, "secret": secret});
-				getDataRegister(body);
-				document.getElementById("r_username").value = "";
-				document.getElementById("r_password").value = "";
-				document.getElementById("r_secret").value = "";
-			}
-			function log_in() {
-				var login = document.getElementById("l_username").value;
-				var passw = document.getElementById("l_password").value;
-				signInData = "username="+String(login)+"&password="+String(passw)+"&grant_type=password";
-				getDataLogin(signInData);
-				document.getElementById("l_username").value = "";
-				document.getElementById("l_password").value = "";
-			}
-		</script>
 	</body>
 </html>
