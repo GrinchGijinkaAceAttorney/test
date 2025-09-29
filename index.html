@@ -1,101 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Log in</title>
+		<title>Mine now :)</title>
 		<style>
-			table {
-				border-collapse: collapse;
-				width: 70%;
-			}
-			th, td {
-				text-align: center;
-				padding: 8px;
-				justify-content: center;
-			}
-			.form {
-				display: flex;
-				flex-wrap: wrap;
-				flex-direction: row;
-				justify-content: center;
-			}
-			label {
-				display: block;
-				width: 150px;
-				padding: 6px 12px;
-				font-size: 14px;
-				line-height: 1.42857143;
-				color: #000;
-				background-image: none;
-				margin-bottom: 20px;
-			}
-			input[type="text"],
-			input[type="password"] {
-				display: block;
-				width: 100px;
-				padding: 6px 12px;
-				font-size: 14px;
-				line-height: 1.42857143;
-				color: #000;
-				background-image: none;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-				margin-bottom: 20px;
-			}
-			.new_row {
-				flex-basis:100%;
-				height: 0px;
-			}
-			button {
-				background-color: #23315d;
-				display: block;
-				width: 200px;
-				padding: 6px 12px;
-				font-size: 14px;
-				line-height: 1.42857143;
-				color: #fff;
-				background-image: none;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-				margin-bottom: 20px;
+			body {
+				background-image: url("./images/spin_test.gif");
+				background-size: cover;
+				background-position: 0% 25%;
+				background-color: #A8322D;
+				background-attachment: fixed;
+				cursor: crosshair;
 			}
 		</style>
 	</head>
 	</body>
-		<p style="background-image: url('./spin_test.gif');">
-		<table>
-			<tr>
-				<th>Welcome! Please log in</th>
-				<th>New here? Join us!</th>
-			</tr>
-			<tr>
-				<td>
-					<div class="form">
-						<label for="l_username">Username:</label>
-						<input id="l_username" type="text" name="u_name" autocomplete="off" />
-						<div class="new_row"></div>
-						<label for="l_password">Password:</label>
-						<input id="l_password" type="password" name="passw" />
-						<div class="new_row"></div>
-						<label>&nbsp;</label>
-						<div class="new_row"></div>
-						<button type="button" onclick="log_in();" />Log in</button>
-					</div>
-				</td>
-				<td>
-					<div class="form">
-						<label for="r_username">Username:</label>
-						<input id="r_username" type="text" autocomplete="off" />
-						<div class="new_row"></div>
-						<label for="r_password">Password:</label>
-						<input id="r_password" type="password" />
-						<div class="new_row"></div>
-						<label for="r_secret">Secret:</label>
-						<input id="r_secret" type="text" name="secret" autocomplete="off" />
-						<div class="new_row"></div>
-						<button type="button" onclick="register();">Create account</button>
-					</div>
-				</td>
-			</tr>
-		</table>
+		<h1>This is a basic thing!</h1>
 	</body>
 </html>
